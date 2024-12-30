@@ -1,0 +1,29 @@
+{
+    ;; !  | means mandatory
+    ;; #  | means optional
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | right_control
+    ;; E  | right_option
+    ;; R  | right_shift
+    ;; P  | caps_lock
+    ;; !! | mandatory command + control + optional + shift (hyper)
+    ;; ## | optional any
+    :devices {:mac-kb [{:is_built_in_keyboard true}]}
+    :applications {:chrome ["^com\\.google\\.Chrome$"]}
+    :main [{:des "Ctrl-Backspace in Chrome"
+            :rules [[:!Tdelete_or_backspace :!Odelete_or_backspace [:chrome]]]}
+           {:des "Ctrl-Left in Chrome"
+            :rules [[:!Tleft_arrow :!Oleft_arrow [:chrome]]]}
+           {:des "Ctrl-Right in Chrome"
+            :rules [[:!Tright_arrow :!Oright_arrow [:chrome]]]}
+           {:des "Ctrl-Delete in Chrome"
+            :rules [[:!Tdelete_forward :!Odelete_forward [:chrome]]]}
+           {:des "Caps lock to control on built in keyboard"
+            :rules [[:##caps_lock :left_control [:mac-kb]]]}
+          ]
+}

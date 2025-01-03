@@ -1,0 +1,25 @@
+[user]
+    name = {{ default "Krzysztof Kościuszkiewicz" .name | quote }}
+    email = {{ default "k.kosciuszkiewicz@gmail.com" .email | quote }}
+
+[pull]
+    rebase = false
+  
+[init]
+    defaultbranch = main
+
+[merge]
+    ff = no
+    commit = no
+
+[alias]
+    st = status -sb
+    co = checkout
+    ci = commit
+    br = branch
+    lg = log --oneline --graph
+    sw = switch
+    amend = commit -a --amend --no-edit
+
+[credential "helperselector"]
+    selected = <no helper>

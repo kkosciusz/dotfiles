@@ -7,6 +7,12 @@ vim.o.clipboard = "unnamedplus"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.scrolloff = 5
+vim.o.cursorline = true
+
+-- search
+vim.o.wrapscan = true
+
+-- windows
 vim.o.splitbelow = true
 vim.o.splitright = true
 

@@ -18,3 +18,7 @@ vim.o.splitright = true
 
 -- cursor
 vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait100-blinkoff250-blinkon250"
+
+-- colors
+vim.o.background = 'dark'
+vim.cmd('colorscheme tokyonight')

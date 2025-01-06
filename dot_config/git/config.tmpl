@@ -1,16 +1,19 @@
 [user]
     name = {{ default "Krzysztof Kościuszkiewicz" .name | quote }}
     email = {{ default "k.kosciuszkiewicz@gmail.com" .email | quote }}
+{{- if hasSuffix "@arista.com" .email }}
+    signingkey = 264FC6F1!
+{{- end }}
 
-[pull]
-    rebase = false
-  
 [init]
     defaultbranch = main
 
 [merge]
     ff = no
     commit = no
+
+[pull]
+    rebase = true
 
 [alias]
     st = status -sb

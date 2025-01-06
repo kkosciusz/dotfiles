@@ -1,0 +1,9 @@
+{{ $email := promptString "email" -}}
+{{ $name := promptString "full name" -}}
+
+data:
+    email: {{ $email | quote }}
+    name: {{ $name | quote }}
+
+template:
+    options: "missingkey=zero"

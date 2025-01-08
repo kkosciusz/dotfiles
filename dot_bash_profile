@@ -4,6 +4,10 @@ export VISUAL=nvim
 export ARSONIC_COLOR=true
 export TZ=Europe/Warsaw
 
+function checkBin {
+   command -v "$1" 2>&1 >/dev/null
+}
+
 function modify_var {
     local varname=${1:?variable name}
     local sep=${2:?separator}
@@ -26,11 +30,18 @@ function modify_var {
 }
 
 function prepend_path {
-    modify_var PATH : append "$1"
+    modify_var PATH : prepend "$1"
 }
+
+checkBin /opt/homebrew/bin/brew  && eval "$(/opt/homebrew/bin/brew shellenv)"
+checkBin fzf                     && eval "$(fzf --bash)"
+checkBin zoxide                  && eval "$(zoxide init --cmd cd bash)"
+checkBin dircolors               && eval "$(dircolors --sh)"
+checkBin pyenv                   && eval "$(pyenv init -)"
 
 prepend_path "$HOME/.cargo/bin"
 prepend_path "$HOME/.local/bin"
 prepend_path "$HOME/bin"
 
+export _loaded_bash_profile=$((_loaded_profile+1))
 [[ -f ~/.bashrc ]] && source ~/.bashrc

@@ -18,10 +18,26 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local lsp = require "lspconfig"
+      local virtualenv = vim.env.VIRTUAL_ENV
+      local pylsp_mypy = { enabled = true }
+      if virtualenv ~= nil then
+        pylsp_mypy["overrides"] = {
+          true, "--python-executable", vim.env.VIRTUAL_ENV .. "/bin/python"
+        }
+      end
       lsp.lua_ls.setup { capabilities = capabilities }
       lsp.pylsp.setup {
         capabilities = capabilities,
-        settings = { pylsp = { plugins = { rope_autoimport = { enabled = true } } } }
+        settings = {
+          pylsp = {
+            plugins = {
+              rope_autoimport = {
+                enabled = true
+              },
+              pylsp_mypy = pylsp_mypy,
+            }
+          }
+        }
       }
       -- lsp.pyright.setup { capabilities = capabilities }
 

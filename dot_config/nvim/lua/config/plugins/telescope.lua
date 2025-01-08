@@ -40,13 +40,13 @@ return {
       vim.keymap.set('n', '<space>fb', function()
         require('telescope.builtin').buffers {}
       end)
-      vim.keymap.set('n', '<space>fg', require("config.telescope.multigrep").live_multigrep)
       vim.keymap.set('n', '<space>en', function()
         require('telescope.builtin').find_files { cwd = vim.fn.stdpath("config") }
       end)
       vim.keymap.set('n', '<space>ep', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") }
       end)
+      vim.keymap.set('n', '<space>fg', require("config.telescope.multigrep").live_multigrep)
       vim.keymap.set('n', '<space>ec', function()
         require('telescope.builtin').find_files {
           find_command = { "fd", "--type", "f", "--color", "never",

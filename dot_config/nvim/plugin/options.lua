@@ -9,6 +9,15 @@ vim.o.relativenumber = true
 vim.o.scrolloff = 5
 vim.o.cursorline = true
 
+-- cursorline only in one buffer, disable in insert mode
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'InsertEnter', 'WinEnter', 'WinLeave' }, {
+  desc = "cursor line only in normal mode in current window",
+  callback = function(arg)
+    local val = arg.event == 'InsertLeave' or arg.event == 'WinEnter'
+    vim.wo.cursorline = val
+  end,
+})
+
 -- search
 vim.o.wrapscan = true
 

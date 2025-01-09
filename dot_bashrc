@@ -96,23 +96,24 @@ function title {
     echo -ne "\033]2;$@\007"  # tmux window name
 }
 
-if [[ -z $_ps1_was_set ]] ; then
-    _saved_user=$(whoami)
-    PROMPT_COMMAND="_status=\$?;${PROMPT_COMMAND}"
-    PS1="\[$_gray\][\[$_reset\]"
-    PS1+="\[$_yellow\]\D{%H:%M} "
-    PS1+="\[$_green\]\$(prompt_user)"
-    PS1+="\[$_gray\]@\[$_reset\]"
-    PS1+="\[$_green\]$(prompt_hostname) "
-    PS1+="\[$_cyan\]\w"
-    PS1+="\[$_pink\]\$(parse_git_branch)"
-    PS1+="\[$_gray\]]\[$_reset\]"
-    PS1+="\n"
-    PS1+="\$(prompt_status ❯) "
-    export _ps1_was_set=1
+_saved_user=$(whoami)
+PROMPT_COMMAND="_status=\$?;${PROMPT_COMMAND}"
+if [[ $VIRTUAL_ENV_PROMPT ]] ; then
+    PS1="($VIRTUAL_ENV_PROMPT) "
+else
+    PS1=""
 fi
+PS1+="\[$_gray\][\[$_reset\]"
+PS1+="\[$_yellow\]\D{%H:%M} "
+PS1+="\[$_green\]\$(prompt_user)"
+PS1+="\[$_gray\]@\[$_reset\]"
+PS1+="\[$_green\]$(prompt_hostname) "
+PS1+="\[$_cyan\]\w"
+PS1+="\[$_pink\]\$(parse_git_branch)"
+PS1+="\[$_gray\]]\[$_reset\]"
+PS1+="\n"
+PS1+="\$(prompt_status ❯) "
 
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 # alias autossh='SYMLINK_AUTH_SOCK=1 autossh -M 0 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 1" -o "ControlMaster=no" -o "SendEnv=SYMLINK_AUTH_SOCK" -A  bus-home'
 export GPG_TTY=$(tty)
-export _loaded_bashrc=$((_loaded_bashrc+1))

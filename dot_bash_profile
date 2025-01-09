@@ -39,9 +39,7 @@ checkBin zoxide                  && eval "$(zoxide init --cmd cd bash)"
 checkBin dircolors               && eval "$(dircolors --sh)"
 checkBin pyenv                   && eval "$(pyenv init -)"
 
-prepend_path "$HOME/.cargo/bin"
 prepend_path "$HOME/.local/bin"
 prepend_path "$HOME/bin"
 
-export _loaded_bash_profile=$((_loaded_profile+1))
 [[ -f ~/.bashrc ]] && source ~/.bashrc

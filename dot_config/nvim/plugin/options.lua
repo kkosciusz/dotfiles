@@ -8,6 +8,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.scrolloff = 5
 vim.o.cursorline = true
+vim.o.conceallevel = 1
 
 -- cursorline only in one buffer, disable in insert mode
 vim.api.nvim_create_autocmd({ 'InsertLeave', 'InsertEnter', 'WinEnter', 'WinLeave' }, {
@@ -20,6 +21,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'InsertEnter', 'WinEnter', 'WinLeav
 
 -- search
 vim.o.wrapscan = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- windows
 vim.o.splitbelow = true

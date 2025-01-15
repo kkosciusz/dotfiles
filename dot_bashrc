@@ -3,7 +3,7 @@ shopt -s checkwinsize
 shopt -s globstar 2> /dev/null
 shopt -s nocaseglob
 
-if [[ "$PS1" ]] ; then
+if [[ "$PS1" && $- == *i* ]] ; then
     bind Space:magic-space
     bind "set completion-ignore-case on"
     bind "set completion-map-case on"
@@ -26,6 +26,8 @@ if [[ "$PS1" ]] ; then
     _dim=$(tput dim)
     _bold=$(tput bold)
     _reset=$(tput sgr0)
+    # disable software flow control (ctrl-s)
+    test -t 0 && stty -ixon
 fi
 
 shopt -s histappend

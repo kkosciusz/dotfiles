@@ -3,6 +3,8 @@ export EDITOR=nvim
 export VISUAL=nvim
 export ARSONIC_COLOR=true
 export TZ=Europe/Warsaw
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
 
 function checkBin {
    command -v "$1" 2>&1 >/dev/null

@@ -49,10 +49,7 @@ return {
       vim.keymap.set('n', '<space>fg', require("config.telescope.multigrep").live_multigrep)
       vim.keymap.set('n', '<space>ec', function()
         require('telescope.builtin').find_files {
-          find_command = { "fd", "--type", "f", "--color", "never",
-            "--full-path", "--fixed-strings",
-            vim.fs.joinpath(vim.fn.expand("~"), ".") },
-          cwd = "~",
+          cwd = vim.fs.joinpath("~", ".config"),
           hidden = true,
         }
       end)

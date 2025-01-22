@@ -1,5 +1,5 @@
 -- Include Arista specific settings
-local path = vim.env.VIM .. "/vimfiles/arista.vim"
-if vim.fn.filereadable(path) then
+local path = "/usr/share/vim/vimfiles/arista.vim"
+if vim.fn.filereadable(path) ~= 0 then
   vim.cmd.source(path)
 end

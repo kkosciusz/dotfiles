@@ -57,19 +57,16 @@ return {
           if not client then return end
 
           if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-              end,
-            })
+            local buf = args.buf
+            vim.bo[buf].formatexpr = 'v:lua.vim.lsp.formatexpr(#{timeout_ms:500})'
           end
         end,
       })
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-      })
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = "rounded", }
+      )
     end,
   }
 }

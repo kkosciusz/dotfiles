@@ -31,11 +31,12 @@ return {
       end
 
       lsp.pylsp.setup {
+        -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9977),
         capabilities = capabilities,
         settings = {
           pylsp = {
             plugins = {
-              pylsp_mypy = pylsp_mypy,
+              -- disabled
               autopep8 = { enabled = false },
               flake8 = { enabled = false },
               mccabe = { enabled = false },
@@ -43,8 +44,11 @@ return {
               pylint = { enabled = false },
               pycodestyle = { enabled = false },
               pydocstyle = { enabled = false },
+              -- enabled
+              pylsp_mypy = pylsp_mypy,
               rope_autoimport = { enabled = true },
-              yapf = { enabled = false },
+              rope_completion = { enabled = true },
+              yapf = { enabled = true },
             }
           }
         }

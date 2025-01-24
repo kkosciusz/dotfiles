@@ -35,3 +35,12 @@ vim.diagnostic.handlers.signs = {
     orig_signs_handler.hide(ns, bufnr)
   end,
 }
+
+-- highlight yanked text for a short time
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Hihglight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

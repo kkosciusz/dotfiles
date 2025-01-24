@@ -18,13 +18,9 @@ end
 -- put lazy into runtimepath
 vim.opt.rtp:prepend(lazypath)
 
--- setup `mapleader` and `maplocalleader` before loading lazy.nvim
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- setup lazy.nvim
-require("lazy").setup({
+require("lazy").setup {
   spec = {
-    { import = "config.plugins" },
+    { import = "plugins" },
   },
-})
+}

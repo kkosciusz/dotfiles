@@ -46,7 +46,7 @@ return {
       vim.keymap.set('n', '<space>ep', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") }
       end)
-      vim.keymap.set('n', '<space>fg', require("config.telescope.multigrep").live_multigrep)
+      vim.keymap.set('n', '<space>fg', require("config.telescope").live_multigrep)
       vim.keymap.set('n', '<space>ec', function()
         require('telescope.builtin').find_files {
           cwd = vim.fs.joinpath("~", ".config"),

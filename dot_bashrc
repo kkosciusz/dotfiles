@@ -97,6 +97,11 @@ function title {
     echo -ne "\033];$@\007"   # without tmux
     echo -ne "\033]2;$@\007"  # tmux window name
 }
+function tmux-clip {
+    # load text from standard input to the tmux copy buffer
+    # -w sends the input to system clipboard via OSC sequence
+    tmux load-buffer -w -
+}
 
 _saved_user=$(whoami)
 PROMPT_COMMAND="_status=\$?;${PROMPT_COMMAND}"

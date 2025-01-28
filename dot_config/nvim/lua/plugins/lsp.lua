@@ -30,6 +30,7 @@ return {
         }
       end
 
+      --[[
       lsp.pylsp.setup {
         -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9977),
         capabilities = capabilities,
@@ -53,7 +54,8 @@ return {
           }
         }
       }
-      -- lsp.pyright.setup { capabilities = capabilities }
+      --]]
+      lsp.basedpyright.setup { capabilities = capabilities }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)

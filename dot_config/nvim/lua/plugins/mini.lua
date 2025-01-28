@@ -12,6 +12,7 @@ return {
       -- Shows all buffers as tabs, rather mouse oriented?
       -- require('mini.tabline').setup { set_vim_settings = false }
       require('mini.trailspace').setup {}
+      require('mini.align').setup {}
     end
   }
 }

@@ -20,17 +20,16 @@ return {
       local lsp = require "lspconfig"
       -- Lua LSP
       lsp.lua_ls.setup { capabilities = capabilities }
+
       -- Python LSP
+      --[[
       local virtualenv = vim.env.VIRTUAL_ENV
       local pylsp_mypy = { enabled = true }
-
       if virtualenv ~= nil then
         pylsp_mypy["overrides"] = {
           true, "--python-executable", vim.env.VIRTUAL_ENV .. "/bin/python"
         }
       end
-
-      --[[
       lsp.pylsp.setup {
         -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9977),
         capabilities = capabilities,
@@ -55,7 +54,17 @@ return {
         }
       }
       --]]
-      lsp.basedpyright.setup { capabilities = capabilities }
+      lsp.basedpyright.setup {
+        capabilities = capabilities,
+        settings = {
+          basedpyright = {
+            typeCheckingMode = "standard",
+            analysis = {
+              diagnosticMode = "openFilesOnly",
+            }
+          }
+        }
+      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)

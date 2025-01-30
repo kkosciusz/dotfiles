@@ -2,6 +2,7 @@ vim.g.mapleader = '<space>'
 
 vim.loader.enable()
 
+require('config.environment')
 require('config.lazy')
 require('config.options')
 require('config.diagnostics')

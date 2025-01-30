@@ -10,6 +10,8 @@ vim.o.relativenumber = true
 vim.o.scrolloff = 5
 vim.o.cursorline = true
 vim.o.conceallevel = 1
+vim.o.listchars = "nbsp:⎵,tab:▸·"
+vim.o.list = true
 
 -- cursorline only in one buffer, disable in insert mode
 vim.api.nvim_create_autocmd({ 'InsertLeave', 'InsertEnter', 'WinEnter', 'WinLeave' }, {

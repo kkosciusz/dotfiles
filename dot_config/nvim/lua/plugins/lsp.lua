@@ -14,6 +14,8 @@ return {
         },
       },
       { "saghen/blink.cmp" },
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()

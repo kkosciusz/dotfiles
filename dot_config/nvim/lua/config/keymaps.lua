@@ -30,6 +30,12 @@ vim.keymap.set('n', '<space>d', function ()
   }
 end)
 
+-- User commands to avoid typos
+vim.api.nvim_create_user_command('W', 'w', {})
+vim.api.nvim_create_user_command('Q', 'q', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command('WQ', 'wq', {})
+
 -- Currently unused
 local format_range_operator = function()
   -- example how to implement an operator that works on motion

@@ -17,6 +17,13 @@ return {
       -- require('mini.tabline').setup { set_vim_settings = false }
       require('mini.trailspace').setup {}
       require('mini.align').setup {}
+
+      -- disable trailspace in some filetypes
+      local f = function(args) vim.b[args.buf].minitrailspace_disable = true end
+      local group = vim.api.nvim_create_augroup('MiniNvim', {clear = true})
+      vim.api.nvim_create_autocmd('Filetype', {
+        group = group, pattern = 'git,fugitive', callback = f,
+      })
     end
   }
 }

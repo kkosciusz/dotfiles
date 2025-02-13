@@ -22,7 +22,7 @@ return {
       local f = function(args) vim.b[args.buf].minitrailspace_disable = true end
       local group = vim.api.nvim_create_augroup('MiniNvim', {clear = true})
       vim.api.nvim_create_autocmd('Filetype', {
-        group = group, pattern = 'git,fugitive', callback = f,
+        group = group, pattern = 'git,fugitive,patch', callback = f,
       })
     end
   }

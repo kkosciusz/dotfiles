@@ -7,3 +7,5 @@
 {{ if ne .chezmoi.os "darwin" -}}
 .config/karabiner.edn
 {{ end -}}
+
+.config/tmux/tpm

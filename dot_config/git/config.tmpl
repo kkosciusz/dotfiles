@@ -1,20 +1,3 @@
-[user]
-    name = {{ default "Krzysztof Kościuszkiewicz" .name | quote }}
-    email = {{ default "k.kosciuszkiewicz@gmail.com" .email | quote }}
-{{- if hasSuffix "@arista.com" .email }}
-    signingkey = 264FC6F1!
-{{- end }}
-
-[init]
-    defaultbranch = main
-
-[merge]
-    ff = no
-    commit = no
-
-[pull]
-    rebase = true
-
 [alias]
     st = status -sb
     co = checkout
@@ -23,6 +6,47 @@
     lg = log --oneline --graph
     sw = switch
     amend = commit -a --amend --no-edit
-
-[credential "helperselector"]
-    selected = <no helper>
+[branch]
+    sort = -committerdate
+[column]
+    ui = auto
+[commit]
+    verbose = true
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[fetch]
+    all = true
+    prune = true
+    pruneTags = true
+[grep]
+    patternType = perl
+[help]
+    autocorrect = prompt
+[init]
+    defaultBranch = main
+[merge]
+    conflictStyle = zdiff3
+[pull]
+    rebase = true
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true
+[rerere]
+    autoupdate = true
+    enabled = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[tag]
+    sort = version:refname
+[user]
+    name = {{ default "Krzysztof Kościuszkiewicz" .name | quote }}
+    email = {{ default "k.kosciuszkiewicz@gmail.com" .email | quote }}
+{{- if hasSuffix "@arista.com" .email }}
+    signingkey = 264FC6F1!
+{{- end }}

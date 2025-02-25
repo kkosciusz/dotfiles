@@ -50,3 +50,10 @@
 {{- if hasSuffix "@arista.com" .email }}
     signingkey = 264FC6F1!
 {{- end }}
+
+{{- if hasSuffix "@arista.com" .email }}
+[gitar]
+    preserveDescription = true
+    promptForBugNumber = true
+    autoStash = true
+{{- end}}

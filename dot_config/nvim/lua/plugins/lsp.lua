@@ -38,6 +38,8 @@ return {
       local lsp = require "lspconfig"
       -- Lua LSP
       lsp.lua_ls.setup { capabilities = capabilities }
+      -- Clangd
+      lsp.clangd.setup {}
 
       -- Python LSP
       --[[

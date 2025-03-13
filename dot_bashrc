@@ -32,7 +32,7 @@ fi
 
 shopt -s histappend
 shopt -s cmdhist
-PROMPT_COMMAND="${PROMPT_COMMAND}history -a;"
+modify_var PROMPT_COMMAND ';' append "history -a"
 HISTSIZE=500000
 HISTFILESIZE=100000
 HISTCONTROL="erasedups:ignoreboth"
@@ -104,7 +104,7 @@ function tmux-clip {
 }
 
 _saved_user=$(whoami)
-PROMPT_COMMAND="_status=\$?;${PROMPT_COMMAND}"
+modify_var PROMPT_COMMAND ';' prepend '_status=$?'
 if [[ $VIRTUAL_ENV_PROMPT ]] ; then
     PS1="($VIRTUAL_ENV_PROMPT) "
 else

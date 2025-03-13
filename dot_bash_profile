@@ -15,24 +15,25 @@ function modify_var {
     local sep=${2:?separator}
     local mode=${3:?\"append\" or \"prepend\"}
     local text=${4:?value}
-    eval local value="\$$varname"
-    if [[ -z $value ]] ; then
+    local value="${!varname}"
+    if [[ ! $value ]] ; then
         value="$text"
     elif [[ "$sep$value$sep" == *"$sep$text$sep"* ]] ; then
         return
     elif [[ "$mode" == append ]] ; then
-        value="$value$sep$text"
+        value="${value%$sep}$sep$text"
     elif [[ "$mode" == prepend ]] ; then
-        value="$text$sep$value"
+        value="$text$sep${value#$sep}"
     else
         echo mode: append or prepend 1>&2
         return 1
     fi
-    eval $(printf "export $varname=%q" "$value")
+    printf -v $varname %s "$value"
 }
 
 function prepend_path {
     modify_var PATH : prepend "$1"
+    export PATH
 }
 
 checkBin /opt/homebrew/bin/brew  && eval "$(/opt/homebrew/bin/brew shellenv)"

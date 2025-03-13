@@ -1,3 +1,5 @@
+source "$HOME/.config/bash/functions"
+
 set -o noclobber
 shopt -s checkwinsize
 shopt -s globstar 2> /dev/null
@@ -43,16 +45,12 @@ shopt -s autocd 2> /dev/null
 shopt -s dirspell 2> /dev/null
 shopt -s cdspell 2> /dev/null
 
-function fixssh() { eval $(tmux show-env -s | grep '^SSH_') ; }
-export -f fixssh
-
 # submit to pastebin
 alias pb='curl -F c=@- pb.infra.corp.arista.io'
 
 # narrower manpages
 alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
 
-function mcd { mkdir -p "$1" && cd "$1" ; }
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -l'
 alias la='ls --color=auto -a'
@@ -93,16 +91,6 @@ function prompt_hostname {
             echo $host ;;
     esac
 }
-function title {
-    echo -ne "\033];$@\007"   # without tmux
-    echo -ne "\033]2;$@\007"  # tmux window name
-}
-function tmux-clip {
-    # load text from standard input to the tmux copy buffer
-    # -w sends the input to system clipboard via OSC sequence
-    tmux load-buffer -w -
-}
-
 _saved_user=$(whoami)
 modify_var PROMPT_COMMAND ';' prepend '_status=$?'
 if [[ $VIRTUAL_ENV_PROMPT ]] ; then

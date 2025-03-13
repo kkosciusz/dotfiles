@@ -6,45 +6,17 @@ export TZ=Europe/Warsaw
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 
-function checkBin {
-   command -v "$1" 2>&1 >/dev/null
-}
+source "$HOME/.config/bash/functions"
 
-function modify_var {
-    local varname=${1:?variable name}
-    local sep=${2:?separator}
-    local mode=${3:?\"append\" or \"prepend\"}
-    local text=${4:?value}
-    local value="${!varname}"
-    if [[ ! $value ]] ; then
-        value="$text"
-    elif [[ "$sep$value$sep" == *"$sep$text$sep"* ]] ; then
-        return
-    elif [[ "$mode" == append ]] ; then
-        value="${value%$sep}$sep$text"
-    elif [[ "$mode" == prepend ]] ; then
-        value="$text$sep${value#$sep}"
-    else
-        echo mode: append or prepend 1>&2
-        return 1
-    fi
-    printf -v $varname %s "$value"
-}
-
-function prepend_path {
-    modify_var PATH : prepend "$1"
-    export PATH
-}
-
-checkBin /opt/homebrew/bin/brew  && eval "$(/opt/homebrew/bin/brew shellenv)"
-checkBin fzf                     && eval "$(fzf --bash)"
-checkBin zoxide                  && eval "$(zoxide init --cmd cd bash)"
-checkBin dircolors               && eval "$(dircolors --sh)"
-checkBin pyenv                   && eval "$(pyenv init -)"
+check_bin /opt/homebrew/bin/brew  && eval "$(/opt/homebrew/bin/brew shellenv)"
+check_bin fzf                     && eval "$(fzf --bash)"
+check_bin zoxide                  && eval "$(zoxide init --cmd cd bash)"
+check_bin dircolors               && eval "$(dircolors --sh)"
+check_bin pyenv                   && eval "$(pyenv init -)"
 
 prepend_path "$HOME/.local/bin"
 prepend_path "$HOME/bin"
 
-checkBin nvim && export EDITOR=nvim && export VISUAL=nvim
+check_bin nvim && export EDITOR=nvim && export VISUAL=nvim
 
 [[ -f ~/.bashrc ]] && source ~/.bashrc

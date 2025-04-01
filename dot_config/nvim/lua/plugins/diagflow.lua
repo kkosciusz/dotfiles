@@ -15,5 +15,8 @@ return {
         hint = "DiagnosticVirtualTextHint",
       },
     },
-  }
+    enabled = function()
+      return vim.version.lt( vim.version(), {0, 11, 0} )
+    end,
+  },
 }

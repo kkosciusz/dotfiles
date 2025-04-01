@@ -1,0 +1,51 @@
+# vim: filetype=bash
+
+function check_bin {
+    command -v "$1" 2>&1 >/dev/null
+}
+
+function modify_var {
+    local varname=${1:?variable name}
+    local sep=${2:?separator}
+    local mode=${3:?\"append\" or \"prepend\"}
+    local text=${4:?value}
+    local value="${!varname}"
+    if [[ ! $value ]] ; then
+        value="$text"
+    elif [[ "$sep$value$sep" == *"$sep$text$sep"* ]] ; then
+        return
+    elif [[ "$mode" == append ]] ; then
+        value="${value%$sep}$sep$text"
+    elif [[ "$mode" == prepend ]] ; then
+        value="$text$sep${value#$sep}"
+    else
+        echo mode: append or prepend 1>&2
+        return 1
+    fi
+    printf -v $varname %s "$value"
+}
+
+function prepend_path {
+    modify_var PATH : prepend "$1"
+    export PATH
+}
+
+function mcd {
+    mkdir -p "$1" && cd "$1"
+}
+
+function tmux-clip {
+    # load text from standard input to the tmux copy buffer
+    # -w sends the input to system clipboard via OSC sequence
+    tmux load-buffer -w -
+}
+
+function tmux-fixssh {
+    # update all SSH environment variables in the pane
+    eval $(tmux show-env -s | grep '^SSH_')
+}
+export -f tmux-fixssh
+
+function source_if_exists {
+    [[ -e $1 ]] && source "$1"
+}

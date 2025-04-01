@@ -8,11 +8,12 @@ export LC_ALL=en_GB.UTF-8
 
 source "$HOME/.config/bash/functions"
 
-check_bin /opt/homebrew/bin/brew  && eval "$(/opt/homebrew/bin/brew shellenv)"
-check_bin fzf                     && eval "$(fzf --bash)"
-check_bin zoxide                  && eval "$(zoxide init --cmd cd bash)"
-check_bin dircolors               && eval "$(dircolors --sh)"
-check_bin pyenv                   && eval "$(pyenv init -)"
+check_bin /opt/homebrew/bin/brew   && eval "$(/opt/homebrew/bin/brew shellenv)"
+check_bin fzf                      && eval "$(fzf --bash)"
+check_bin zoxide                   && eval "$(zoxide init --cmd cd bash)"
+check_bin dircolors                && eval "$(dircolors --sh)"
+check_bin pyenv                    && eval "$(pyenv init -)"
+test -d /opt/homebrew/opt/ruby/bin && prepend_path /opt/homebrew/opt/ruby/bin
 
 prepend_path "$HOME/.local/bin"
 prepend_path "$HOME/bin"

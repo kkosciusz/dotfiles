@@ -1,0 +1,16 @@
+# vim: filetype=bash
+
+# Arista specific
+alias aristalogin='arista-ssh check-auth | grep -q "session is valid" || arista-ssh login'
+alias aristabus='et -f --ssh-socket=$HOME/.ssh/arista-ssh/agent.sock kkosciuszkiewicz-home'
+alias pb='curl -F c=@- pb.infra.corp.arista.io'
+
+# General
+alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
+alias ls='ls --color=auto'
+alias ll='ls --color=auto -l'
+alias la='ls --color=auto -a'
+alias cp='cp -i'
+alias mv='mv -i'
+alias cm='chezmoi'
+

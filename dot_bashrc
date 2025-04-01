@@ -1,4 +1,5 @@
 source "$HOME/.config/bash/functions"
+source "$HOME/.config/bash/aliases"
 
 set -o noclobber
 shopt -s checkwinsize
@@ -44,18 +45,6 @@ HISTTIMEFORMAT='%F %T '
 shopt -s autocd 2> /dev/null
 shopt -s dirspell 2> /dev/null
 shopt -s cdspell 2> /dev/null
-
-# submit to pastebin
-alias pb='curl -F c=@- pb.infra.corp.arista.io'
-
-# narrower manpages
-alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'
-
-alias ls='ls --color=auto'
-alias ll='ls --color=auto -l'
-alias la='ls --color=auto -a'
-alias cp='cp -i'
-alias mv='mv -i'
 
 function parse_git_dirty {
   [[ $(git status --porcelain 2> /dev/null) ]] && echo "+"
@@ -109,6 +98,5 @@ PS1+="\[$_gray\]]\[$_reset\]"
 PS1+="\n"
 PS1+="\$(prompt_status ❯) "
 
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-# alias autossh='SYMLINK_AUTH_SOCK=1 autossh -M 0 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 1" -o "ControlMaster=no" -o "SendEnv=SYMLINK_AUTH_SOCK" -A  bus-home'
+source_if_exists /opt/homebrew/etc/profile.d/bash_completion.sh
 export GPG_TTY=$(tty)

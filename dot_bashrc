@@ -1,5 +1,4 @@
 source "$HOME/.config/bash/functions"
-source "$HOME/.config/bash/aliases"
 
 set -o noclobber
 shopt -s checkwinsize
@@ -31,6 +30,9 @@ if [[ "$PS1" && $- == *i* ]] ; then
     _reset=$(tput sgr0)
     # disable software flow control (ctrl-s)
     test -t 0 && stty -ixon
+    source_if_exists /opt/homebrew/etc/profile.d/bash_completion.sh
+    source_if_exists /usr/share/bash-completion/bash_completion
+    source "$HOME/.config/bash/aliases"
 fi
 
 shopt -s histappend
@@ -98,6 +100,4 @@ PS1+="\[$_gray\]]\[$_reset\]"
 PS1+="\n"
 PS1+="\$(prompt_status ❯) "
 
-source_if_exists /opt/homebrew/etc/profile.d/bash_completion.sh
-source_if_exists /etc/bash_completion
 export GPG_TTY=$(tty)

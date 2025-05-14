@@ -53,3 +53,10 @@ function source_if_exists {
 function osc52 {
     printf "\x1b]52;c;%s\x07" "$(base64)"
 }
+
+function complete_alias_as {
+    local alias=${1:?alias name expected}
+    local command=${2:?command name expected}
+    local completion="$(complete -p $command 2>/dev/null | sed "s/^complete \(.*\) $command\$/\1/")"
+    [[ $completion ]] && complete $completion $alias
+}

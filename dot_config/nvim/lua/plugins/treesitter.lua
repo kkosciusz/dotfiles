@@ -8,6 +8,7 @@ return {
         "c",
         "cmake",
         "cpp",
+        "go",
         "html",
         "ini",
         "javascript",

@@ -12,5 +12,5 @@ alias ll='ls --color=auto -l'
 alias la='ls --color=auto -a'
 alias cp='cp -i'
 alias mv='mv -i'
-
 alias cm='chezmoi' ; complete_alias_as cm chezmoi
+alias kubectl='kubectl_disabled'

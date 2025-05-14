@@ -36,6 +36,10 @@ vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('WQ', 'wq', {})
 
+-- Window navigation idea from Samuel Angebault
+vim.keymap.set('n', '<Backspace>', '<C-w>')
+vim.keymap.set('n', '<Backspace><Backspace>', '<C-w>w')
+
 -- Currently unused
 local format_range_operator = function()
   -- example how to implement an operator that works on motion

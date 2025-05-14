@@ -51,5 +51,5 @@ function source_if_exists {
 }
 
 function osc52 {
-    printf "\x1b]52;c;%s\x07" $(base64)
+    printf "\x1b]52;c;%s\x07" "$(base64)"
 }

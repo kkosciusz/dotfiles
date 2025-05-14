@@ -54,6 +54,18 @@ function osc52 {
     printf "\x1b]52;c;%s\x07" "$(base64)"
 }
 
+function venv {
+    local dir="${1:-.venv}"
+    if [[ -d "${dir}" ]]; then
+        echo 1>&2 "directory '${dir}' already exists, activating virtual environment"
+    else
+        python3 -m venv "${dir}"
+    fi
+
+    source "${dir}/bin/activate"
+    pip -q install --upgrade pip
+}
+
 function complete_alias_as {
     local alias=${1:?alias name expected}
     local command=${2:?command name expected}

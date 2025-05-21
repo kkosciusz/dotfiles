@@ -33,6 +33,7 @@ function prepend_path {
 function mcd {
     mkdir -p "$1" && cd "$1"
 }
+complete -A directory mcd
 
 function tmux-clip {
     # load text from standard input to the tmux copy buffer
@@ -55,16 +56,24 @@ function osc52 {
 }
 
 function venv {
-    local dir="${1:-.venv}"
-    if [[ -d "${dir}" ]]; then
-        echo 1>&2 "directory '${dir}' already exists, activating virtual environment"
-    else
-        python3 -m venv "${dir}"
-    fi
-
+    declare -a options=()
+    local OPTIND=1
+    while getopts ":s" option; do
+        case $option in
+            s)  options+=(--system-site-packages)
+                ;;
+            *)  printf >&2 "Usage: %s [-s] [directory]\nOptions:\n" "${FUNCNAME[0]}"
+                printf >&2 " -s    Enable site packages (--system-site-packages)\n"
+                return 1
+                ;;
+        esac
+    done
+    shift $((OPTIND -1))
+    declare dir="${1:-.venv}"
+    [[ -d "${dir}" ]] || python3 -m venv "${options[@]}" "${dir}"
     source "${dir}/bin/activate"
-    pip -q install --upgrade pip
 }
+complete -A directory -W "-s" venv
 
 function complete_alias_as {
     local alias=${1:?alias name expected}

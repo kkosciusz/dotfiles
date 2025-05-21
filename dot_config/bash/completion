@@ -1,0 +1,18 @@
+if check_bin tmux-session; then
+    _tmux_session() {
+        local IFS=$' \t\n'
+        COMPREPLY=()
+        local cmd="$1"
+        local word="$2"
+        local prev="$3"
+        [[ $prev == "=" ]] && return
+        local candidates="list edit -h --help -v --verbose"
+        case "$prev" in
+            list) return ;;
+            edit) candidates="$(tmux-session list)" ;;
+            *) candidates+=" $(tmux-session list)" ;;
+        esac
+        COMPREPLY=( $(compgen -W "$candidates" -- "$word" ) )
+    }
+    complete -F _tmux_session tmux-session
+fi

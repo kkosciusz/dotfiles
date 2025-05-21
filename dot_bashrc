@@ -32,7 +32,8 @@ if [[ "$PS1" && $- == *i* ]] ; then
     test -t 0 && stty -ixon
     source_if_exists /opt/homebrew/etc/profile.d/bash_completion.sh
     source_if_exists /usr/share/bash-completion/bash_completion
-    source "$HOME/.config/bash/aliases"
+    source_if_exists "$HOME/.config/bash/aliases"
+    source_if_exists "$HOME/.config/bash/completion"
 fi
 
 shopt -s histappend

@@ -56,7 +56,7 @@ function osc52 {
 }
 
 function venv {
-    declare -a options=()
+    declare -a options=(--upgrade-deps)
     local OPTIND=1
     while getopts ":s" option; do
         case $option in

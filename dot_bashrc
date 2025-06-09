@@ -37,6 +37,7 @@ if [[ "$PS1" && $- == *i* ]] ; then
 fi
 
 shopt -s histappend
+shopt -s histverify
 shopt -s cmdhist
 modify_var PROMPT_COMMAND ';' append "history -a"
 HISTSIZE=500000

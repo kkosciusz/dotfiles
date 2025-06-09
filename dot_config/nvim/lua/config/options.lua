@@ -41,3 +41,6 @@ end
 -- colors
 vim.o.background = 'dark'
 vim.cmd('colorscheme tokyonight')
+
+-- load per directory configuration
+vim.o.exrc = true

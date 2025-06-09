@@ -88,13 +88,7 @@ function kubectl_disabled {
         echo >&2 "contexts: $(command kubectl config get-contexts -o name | paste -s -d ' ' -)"
         return 1
     fi
-    unalias kubectl
-    local kubedir="$([[ $KUBECONFIG ]] && dirname "$KUBECONFIG" || echo $HOME/.kube)"
-    local oldconfig="$kubedir/config"
-    local tmpfile="$(mktemp -p $kubedir -t config-)"
-    cp "$oldconfig" "$tmpfile"
-    trap "rm $tmpfile" EXIT
-    export KUBECONFIG="$tmpfile"
-    kubectl config use-context "$2"
-    export PS1="[\[$_pink\]k8s \$(kubectl config current-context)\[$_reset\]] $PS1"
+    alias kubectl="kubectl --context=$2"
+    export PS1="[\[$_pink\]k8s $2\[$_reset\]] $PS1"
+    unset -f "$FUNCNAME"
 }

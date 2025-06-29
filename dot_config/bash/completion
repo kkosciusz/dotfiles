@@ -1,3 +1,5 @@
+# vim: filetype=bash
+
 if check_bin tmux-session; then
     _tmux_session() {
         local IFS=$' \t\n'
@@ -15,4 +17,8 @@ if check_bin tmux-session; then
         COMPREPLY=( $(compgen -W "$candidates" -- "$word" ) )
     }
     complete -F _tmux_session tmux-session
+fi
+
+if check_bin chezmoi; then
+    eval "$(chezmoi completion bash)"
 fi

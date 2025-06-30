@@ -1,17 +1,20 @@
 [alias]
-    st = status -sb
-    co = checkout
-    ci = commit
-    br = branch
-    lg = log --oneline --graph
-    sw = switch
     amend = commit -a --amend --no-edit
+    br = branch
+    ci = commit
+    co = checkout
+    lg = log --oneline --graph
+    st = status -sb
+    sw = switch
+    vc = verify-commit
 [branch]
     sort = -committerdate
 [column]
     ui = auto
 [commit]
     verbose = true
+[core]
+    fsmonitor = true
 [diff]
     algorithm = histogram
     colorMoved = plain

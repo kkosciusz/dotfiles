@@ -3,7 +3,7 @@
 # Arista specific
 alias aristalogin='arista-ssh check-auth | grep -q "session is valid" || arista-ssh login'
 alias aristabus='et -f --ssh-socket=$HOME/.ssh/arista-ssh/agent.sock kkosciuszkiewicz-home'
-alias pb='curl -F c=@- pb.infra.corp.arista.io'
+alias pb='curl -F "t=$USER@arista.com" -F c=@- pb.infra.corp.arista.io'
 
 # General
 alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'

@@ -92,3 +92,10 @@ function kubectl_disabled {
     export PS1="[\[$_pink\]k8s $2\[$_reset\]] $PS1"
     unset -f "$FUNCNAME"
 }
+
+function lsbranch {
+   git rev-parse --is-inside-work-tree >/dev/null || return 1
+   local mainBranch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')"
+   local format="%C(auto)%h %<(30)%D%C(reset) %<(60)%s %C(auto,blue)%>>(12)%cr %C(auto,red)%>(14)%ar%C(reset)"
+   git rev-list --no-commit-header --pretty="$format" --branches=* --single-worktree ^"$mainBranch"
+}

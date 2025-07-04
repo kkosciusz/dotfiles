@@ -89,6 +89,7 @@ function kubectl_disabled {
         return 1
     fi
     alias kubectl="kubectl --context=$2"
+    alias virtctl="virtctl --context=$2"
     export PS1="[\[$_pink\]k8s $2\[$_reset\]] $PS1"
     unset -f "$FUNCNAME"
 }

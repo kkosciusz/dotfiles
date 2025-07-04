@@ -48,18 +48,20 @@ return {
         nerd_font_variant = 'normal'
       },
 
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-        cmdline = function()
+      cmdline = {
+        enabled = true,
+        sources = function()
           local type = vim.fn.getcmdtype()
-          if type == "/" or type == "?" then
-            return { "buffer" }
-          end
-          if type == ":" then
-            return { "cmdline" }
-          end
+          -- Search forward and backward
+          if type == '/' or type == '?' then return { 'buffer' } end
+          -- Commands
+          if type == ':' or type == '@' then return { 'cmdline', 'buffer' } end
           return {}
         end,
+      },
+
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
           lsp = {
             min_keyword_length = 2, -- Number of characters to trigger porvider

@@ -83,9 +83,10 @@ function complete_alias_as {
 }
 
 function kubectl_disabled {
-    if [[ $1 != enable || ! $2 ]] ; then
+    local -a contexts=( $(command kubectl config get-contexts -o name) )
+    if [[ $1 != enable || ! $2 ]] || ! fgrep -qw -e "$2" <<<"${contexts[*]}" ; then
         echo >&2 "run 'kubectl enable <context>' to enable kubectl"
-        echo >&2 "contexts: $(command kubectl config get-contexts -o name | paste -s -d ' ' -)"
+        echo >&2 "contexts: ${contexts[*]}"
         return 1
     fi
     alias kubectl="kubectl --context=$2"

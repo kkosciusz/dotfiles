@@ -1,4 +1,4 @@
-# vim: filetype=bash
+# vim: ft=bash
 
 if check_bin tmux-session; then
     _tmux_session() {
@@ -19,6 +19,5 @@ if check_bin tmux-session; then
     complete -F _tmux_session tmux-session
 fi
 
-if check_bin chezmoi; then
-    eval "$(chezmoi completion bash)"
-fi
+check_bin chezmoi    && eval "$(chezmoi completion bash)"
+check_bin arista-ssh && eval "$(arista-ssh completion bash)"

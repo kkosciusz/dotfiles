@@ -1,6 +1,5 @@
 source "$HOME/.config/bash/functions"
 
-set -o noclobber
 shopt -s checkwinsize
 shopt -s globstar 2> /dev/null
 shopt -s nocaseglob

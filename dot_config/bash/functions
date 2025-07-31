@@ -1,7 +1,7 @@
 # vim: filetype=bash
 
 function check_bin {
-    command -v "$1" 2>&1 >/dev/null
+    type -P "$1" 2>&1 >/dev/null
 }
 
 function modify_var {
@@ -100,4 +100,10 @@ function lsbranch {
    local mainBranch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')"
    local format="%C(auto)%h %<(30)%D%C(reset) %<(60)%s %C(auto,blue)%>>(12)%cr %C(auto,red)%>(14)%ar%C(reset)"
    git rev-list --no-commit-header --pretty="$format" --branches=* --single-worktree ^"$mainBranch"
+}
+
+function gerrit-latest {
+    local review_id="${1:?need gerrit review id}"
+    local refs=$(git ls-remote $(git remote get-url origin) "*/$review_id/*" | awk '/[0-9]+$/ {print $2}')
+    [[ -n "$refs" ]] && { sort -rV | head -n 1; } <<<"$refs"
 }

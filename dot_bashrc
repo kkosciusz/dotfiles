@@ -31,6 +31,14 @@ if [[ "$PS1" && $- == *i* ]] ; then
     test -t 0 && stty -ixon
     source_if_exists /opt/homebrew/etc/profile.d/bash_completion.sh
     source_if_exists /usr/share/bash-completion/bash_completion
+    if [[ -e /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ]]; then
+        KUBE_PS1_PREFIX="$_grey["
+        KUBE_PS1_SEPARATOR=" "
+        KUBE_PS1_SUFFIX="$_grey]"
+        KUBE_PS1_SYMBOL_CUSTOM=k8s
+        source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
+        RPROMPT+="\$(kube_ps1)"
+    fi
     source_if_exists "$HOME/.config/bash/completion"
     source_if_exists "$HOME/.config/bash/aliases"
 fi

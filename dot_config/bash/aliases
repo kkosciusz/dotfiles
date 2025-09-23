@@ -14,4 +14,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias cm='chezmoi' ; complete_alias_as cm chezmoi
 alias kctl='kubectl'; complete_alias_as kctl kubectl
-alias kubectl='kubectl_disabled'
+alias kdev='kubectl config use-context dev'
+alias kinfra='kubectl config use-context infra'
+alias kctx='kubectx'

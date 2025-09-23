@@ -1,4 +1,4 @@
-vim.g.mapleader = '<space>'
+vim.g.mapleader = ' '
 
 vim.loader.enable()
 

@@ -17,4 +17,4 @@ alias kctl='kubectl'; complete_alias_as kctl kubectl
 alias kdev='kubectl config use-context dev'
 alias kinfra='kubectl config use-context infra'
 alias kctx='kubectx'
-alias tms='tmux-session'; complete_alias_as tms tmux-session
+alias tms='tmux-session'; complete_alias_as_arcomplete tms tmux-session

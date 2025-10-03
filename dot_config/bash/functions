@@ -82,6 +82,46 @@ function complete_alias_as {
     [[ $completion ]] && complete $completion $alias
 }
 
+function complete_alias_as_arcomplete {
+    local alias=${1:?alias name expected}
+    local command=${2:?command name expected}
+
+    # Get the completion function for the original command
+    local comp_func=$(complete -p "$command" 2>/dev/null | sed -n 's/.*-F \([^ ]*\).*/\1/p')
+
+    if [[ -z "$comp_func" ]]; then
+        echo "Warning: No completion function found for '$command'" >&2
+        return 1
+    fi
+
+    # Create a wrapper function that transforms alias to command
+    local wrapper_name="_complete_${alias}_wrapper"
+    eval "
+    $wrapper_name() {
+        # Calculate length difference for COMP_POINT adjustment
+        local alias_len=${#alias}
+        local cmd_len=${#command}
+        local len_diff=\$((cmd_len - alias_len))
+
+        # Only replace alias at start of COMP_LINE (word boundary)
+        if [[ \"\$COMP_LINE\" == \"$alias \"* ]] || [[ \"\$COMP_LINE\" == \"$alias\" ]]; then
+            COMP_LINE=\"$command\${COMP_LINE:\$alias_len}\"
+            COMP_POINT=\$((COMP_POINT + len_diff))
+        fi
+
+        # Replace alias with command in COMP_WORDS[0]
+        COMP_WORDS[0]=\"$command\"
+
+        # Call the original completion function with proper arguments
+        # \$1 = command name, \$2 = current word, \$3 = previous word
+        $comp_func \"\${COMP_WORDS[0]}\" \"\${COMP_WORDS[COMP_CWORD]}\" \"\${COMP_WORDS[COMP_CWORD-1]}\"
+    }
+    "
+
+    # Register the wrapper function for the alias
+    complete -F "$wrapper_name" "$alias"
+}
+
 function lsbranch {
    git rev-parse --is-inside-work-tree >/dev/null || return 1
    local mainBranch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')"

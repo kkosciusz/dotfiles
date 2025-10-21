@@ -4,6 +4,8 @@
     ci = commit
     co = checkout
     lg = log --oneline --graph
+    rb = rebase
+    rbm = !git fetch origin && git rebase refs/remotes/origin/HEAD --update-refs
     st = status -sb
     sw = switch
     vc = verify-commit
@@ -15,6 +17,7 @@
     verbose = true
 [core]
     fsmonitor = true
+    preloadindex = true
 [diff]
     algorithm = histogram
     colorMoved = plain
@@ -59,4 +62,12 @@
     preserveDescription = true
     promptForBugNumber = true
     autoStash = true
+    lineWrap = false
+    supportOneLineMessage = true
+    recursiveLaunch = false
+    promptForTestingDone = false
+    rebaseOnUpdate = true
+    configured = true
+[safe]
+    directory = /src/GitarBandMutDb
 {{- end}}

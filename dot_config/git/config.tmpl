@@ -1,6 +1,9 @@
+[advice]
+    skippedCherryPicks = false
 [alias]
     amend = commit -a --amend --no-edit
     br = branch
+    newbr = checkout refs/remotes/origin/HEAD -B
     ci = commit
     co = checkout
     lg = log --oneline --graph
@@ -24,7 +27,7 @@
     mnemonicPrefix = true
     renames = true
 [fetch]
-    all = true
+    all = false
     prune = true
     pruneTags = true
 [grep]

@@ -58,6 +58,7 @@ function osc52 {
 function venv {
     declare -a options=(--upgrade-deps)
     local OPTIND=1
+    local option
     while getopts ":s" option; do
         case $option in
             s)  options+=(--system-site-packages)
@@ -69,7 +70,7 @@ function venv {
         esac
     done
     shift $((OPTIND -1))
-    declare dir="${1:-.venv}"
+    local dir="${1:-.venv}"
     [[ -d "${dir}" ]] || python3 -m venv "${options[@]}" "${dir}"
     source "${dir}/bin/activate"
 }
@@ -89,10 +90,7 @@ function complete_alias_as_arcomplete {
     # Get the completion function for the original command
     local comp_func=$(complete -p "$command" 2>/dev/null | sed -n 's/.*-F \([^ ]*\).*/\1/p')
 
-    if [[ -z "$comp_func" ]]; then
-        echo "Warning: No completion function found for '$command'" >&2
-        return 1
-    fi
+    [[ -z "$comp_func" ]] && return 1
 
     # Create a wrapper function that transforms alias to command
     local wrapper_name="_complete_${alias}_wrapper"
@@ -131,6 +129,7 @@ function lsbranch {
 
 function gerrit-latest {
     local review_id="${1:?need gerrit review id}"
-    local refs=$(git ls-remote $(git remote get-url origin) "*/$review_id/*" | awk '/[0-9]+$/ {print $2}')
+    local remote_name="${2:-origin}"
+    local refs=$(git ls-remote $(git remote get-url $remote_name) "*/$review_id/*" | awk '/[0-9]+$/ {print $2}')
     [[ -n "$refs" ]] && { sort -rV | head -n 1; } <<<"$refs"
 }

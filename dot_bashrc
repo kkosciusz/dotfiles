@@ -39,6 +39,7 @@ if [[ "$PS1" && $- == *i* ]] ; then
         source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
         RPROMPT+="\$(kube_ps1)"
     fi
+    check_bin fzf && eval "$(fzf --bash)"
     source_if_exists "$HOME/.config/bash/completion"
     source_if_exists "$HOME/.config/bash/aliases"
 fi

@@ -81,16 +81,9 @@ function prompt_user {
     fi
 }
 function prompt_hostname {
-    local hostname=${1:-$(hostname)}
+    local hostname="${1:-${HOSTNAME}}"
     local host=$(echo "$hostname" | sed 's/^\([^.]\{3,\}\)\..*/\1/')
-    case $host in
-        $USER-home* )
-            echo bus-home ;;
-        *MacBook* )
-            echo macbook ;;
-        * )
-            echo $host ;;
-    esac
+    echo "$host"
 }
 prompt_left() { eval "printf %s \"$LPROMPT\""; }
 prompt_right() { eval "printf %s \"$RPROMPT\""; }

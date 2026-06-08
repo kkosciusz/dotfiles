@@ -1,0 +1,4 @@
+# vim: ft=dircolors
+DIR 01;34
+STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 01;34;40 # dir that is other-writable (o+w) and not sticky

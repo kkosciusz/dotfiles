@@ -152,6 +152,26 @@ function lsbranch {
    git rev-list --no-commit-header --pretty="$format" --branches=* --single-worktree ^"$mainBranch"
 }
 
+function xdg_data_home {
+    printf '%s\n' "${XDG_DATA_HOME:-$HOME/.local/share}"
+}
+
+function xdg_config_home {
+    printf '%s\n' "${XDG_CONFIG_HOME:-$HOME/.config}"
+}
+
+function xdg_state_home {
+    printf '%s\n' "${XDG_STATE_HOME:-$HOME/.local/state}"
+}
+
+function xdg_cache_home {
+    printf '%s\n' "${XDG_CACHE_HOME:-$HOME/.cache}"
+}
+
+function xdg_runtime_dir {
+    printf '%s\n' "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+}
+
 function gerrit-latest {
     local review_id="${1:?need gerrit review id}"
     local remote_name="${2:-origin}"

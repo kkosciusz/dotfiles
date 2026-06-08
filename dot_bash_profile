@@ -15,6 +15,7 @@ source "$HOME/.config/bash/functions"
 check_bin /opt/homebrew/bin/brew   && eval "$(/opt/homebrew/bin/brew shellenv)"
 check_bin dircolors                && eval "$(dircolors -p | cat - ~/.config/dir_colors | dircolors --sh -)" && export USER_LS_COLORS=1
 test -d /opt/homebrew/opt/ruby/bin && prepend_path /opt/homebrew/opt/ruby/bin
+check_bin go                       && prepend_path "$(go env GOPATH)/bin"
 
 prepend_path "$HOME/.local/bin"
 prepend_path "$HOME/bin"

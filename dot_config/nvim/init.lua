@@ -11,5 +11,6 @@ require('config.floterminal')
 require('config.terminal')
 require('config.python')
 require('config.lsp')
+require('config.gitlink')
 
 require('config.arista')

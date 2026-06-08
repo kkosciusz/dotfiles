@@ -5,6 +5,8 @@ alias aristalogin='arista-ssh check-auth | grep -q "session is valid" || arista-
 alias aristabus='et -f --ssh-socket=$HOME/.ssh/arista-ssh/agent.sock'
 alias aristahome='et -f --ssh-socket=$HOME/.ssh/arista-ssh/agent.sock kkosciuszkiewicz-home'
 alias pb='curl -F "t=$USER@arista.com" -F c=@- pb.infra.corp.arista.io'
+check_bin lclaude && alias claude=lclaude && complete_alias_as lclaude claude
+check_bin lcodex && alias codex=lcodex && complete_alias_as lcodex codex
 
 # General
 alias man='MANWIDTH=$((COLUMNS > 80 ? 80 : COLUMNS)) man'

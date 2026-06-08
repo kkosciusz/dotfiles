@@ -2,4 +2,5 @@
 check_bin chezmoi    && eval "$(chezmoi completion bash)"
 check_bin arista-ssh && eval "$(arista-ssh completion bash)"
 check_bin tmux-session && check_bin register-python-argcomplete && eval "$(register-python-argcomplete tmux-session)"
+check_bin codex && eval "$(command codex completion)"
 [[ -f ~/.bash_completion ]] && source ~/.bash_completion

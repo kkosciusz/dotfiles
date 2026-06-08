@@ -10,14 +10,37 @@ function modify_var {
     local mode=${3:?\"append\" or \"prepend\"}
     local text=${4:?value}
     local value="${!varname}"
-    if [[ ! $value ]] ; then
+    local remainder
+    local part
+    local stripped=
+    local first=1
+    local -a parts=()
+
+    if [[ $value ]] ; then
+        remainder=$value
+        while [[ "$remainder" == *"$sep"* ]] ; do
+            parts+=( "${remainder%%"$sep"*}" )
+            remainder="${remainder#*"$sep"}"
+        done
+        parts+=( "$remainder" )
+
+        for part in "${parts[@]}" ; do
+            [[ "$part" == "$text" ]] && continue
+            if (( first )) ; then
+                stripped="$part"
+                first=0
+            else
+                stripped+="$sep$part"
+            fi
+        done
+    fi
+
+    if [[ ! $stripped ]] ; then
         value="$text"
-    elif [[ "$sep$value$sep" == *"$sep$text$sep"* ]] ; then
-        return
     elif [[ "$mode" == append ]] ; then
-        value="${value%$sep}$sep$text"
+        value="$stripped$sep$text"
     elif [[ "$mode" == prepend ]] ; then
-        value="$text$sep${value#$sep}"
+        value="$text$sep$stripped"
     else
         echo mode: append or prepend 1>&2
         return 1
@@ -26,8 +49,10 @@ function modify_var {
 }
 
 function prepend_path {
-    modify_var PATH : prepend "$1"
-    export PATH
+    if [[ -d $1 ]]; then
+        modify_var PATH : prepend "$1"
+        export PATH
+    fi
 }
 
 function mcd {
